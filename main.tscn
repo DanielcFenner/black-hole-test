@@ -1,0 +1,199 @@
+[gd_scene load_steps=30 format=3 uid="uid://cfc6pa1y366nm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_jpria"]
+[ext_resource type="AudioStream" uid="uid://burk6yt077m86" path="res://assets/pops/1.mp3" id="2_d75ti"]
+[ext_resource type="AudioStream" uid="uid://cqttkvths1hna" path="res://assets/pops/2.mp3" id="3_nbegs"]
+[ext_resource type="AudioStream" uid="uid://cggb28271jyek" path="res://assets/pops/3.mp3" id="4_88gnv"]
+[ext_resource type="AudioStream" uid="uid://b8fiq3ne5vf0y" path="res://assets/pops/4.mp3" id="5_y1475"]
+[ext_resource type="AudioStream" uid="uid://dbdcfasateaii" path="res://assets/pops/5.mp3" id="6_ogukg"]
+[ext_resource type="AudioStream" uid="uid://cf3o7hsfa3nm2" path="res://assets/pops/6.mp3" id="7_qexxj"]
+[ext_resource type="StyleBox" uid="uid://cof4874mj8d1c" path="res://progressbar_background.tres" id="13_yiudb"]
+[ext_resource type="Texture2D" uid="uid://bucadhxqjrs4m" path="res://assets/circle_05.png" id="14_fovqp"]
+[ext_resource type="StyleBox" uid="uid://c0kq1l4olf3mm" path="res://progressbar_foreground.tres" id="14_i7vxx"]
+[ext_resource type="FontFile" uid="uid://8giiv7euf4nf" path="res://assets/fonts/OpenRunde-Semibold.otf" id="14_tq8ew"]
+[ext_resource type="Texture2D" uid="uid://ubgqhf1ft02y" path="res://assets/circleoverlay.png" id="15_1xep3"]
+[ext_resource type="Texture2D" uid="uid://pmqma5bb5em6" path="res://assets/twirl_01.png" id="16_3d3o7"]
+[ext_resource type="AudioStream" uid="uid://ctcsg5g4oa5xx" path="res://assets/levelup/cute-level-up-1-189852.mp3" id="17_0wly3"]
+[ext_resource type="Script" path="res://ProgressBar.gd" id="17_miavh"]
+[ext_resource type="Texture2D" uid="uid://7yt7l8bvsw0w" path="res://assets/light_03.png" id="17_yym83"]
+[ext_resource type="Texture2D" uid="uid://iskkysjt351x" path="res://assets/circlebright.png" id="18_04s8s"]
+[ext_resource type="AudioStream" uid="uid://btymovlq5vhkm" path="res://assets/levelup/cute-level-up-2-189851.mp3" id="18_jvctf"]
+[ext_resource type="AudioStream" uid="uid://ce25rti6bfjvy" path="res://assets/levelup/cute-level-up-3-189853.mp3" id="19_mn4rb"]
+
+[sub_resource type="Environment" id="Environment_rui36"]
+background_mode = 3
+ambient_light_source = 1
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_threshold = 1.6
+adjustment_contrast = 5.12
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rqqjl"]
+radius = 61.7059
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxa1j"]
+size = Vector2(1665.51, 2472.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppsvs"]
+size = Vector2(2850, 55)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uwvvh"]
+playback_mode = 1
+random_pitch = 2.34
+streams_count = 6
+stream_0/stream = ExtResource("2_d75ti")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_nbegs")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("4_88gnv")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("5_y1475")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("6_ogukg")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("7_qexxj")
+stream_5/weight = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ykaes"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mswl6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qeo14"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6cvgh"]
+blend_mode = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pbt4i"]
+streams_count = 3
+stream_0/stream = ExtResource("17_0wly3")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("18_jvctf")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("19_mn4rb")
+stream_2/weight = 1.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jpria")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rui36")
+
+[node name="Black Hole" type="Area2D" parent="."]
+position = Vector2(176, 36)
+gravity_space_override = 2
+gravity_point = true
+gravity = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Black Hole"]
+scale = Vector2(44.28, 44.28)
+shape = SubResource("CircleShape2D_rqqjl")
+
+[node name="ColorRect" type="ColorRect" parent="Black Hole"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Detector" type="Area2D" parent="Black Hole"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Black Hole/Detector"]
+position = Vector2(-1077, -802)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_dxa1j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1004, 1092)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(30, 17.5)
+shape = SubResource("RectangleShape2D_ppsvs")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 700.0
+offset_top = 166.0
+offset_right = 1197.0
+offset_bottom = 235.0
+theme_override_font_sizes/font_size = 50
+text = "dude has subscribed"
+
+[node name="Popper" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_uwvvh")
+pitch_scale = 2.0
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Circle Inner" type="Sprite2D" parent="Node"]
+visible = false
+self_modulate = Color(0.160784, 0.160784, 0.160784, 0)
+position = Vector2(16, 15)
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("14_fovqp")
+
+[node name="Circle Overlay" type="Sprite2D" parent="Node/Circle Inner"]
+visible = false
+position = Vector2(-0.00012207, -0.00012207)
+texture = ExtResource("15_1xep3")
+
+[node name="Shiny" type="Sprite2D" parent="Node/Circle Inner"]
+self_modulate = Color(0.371506, 0.675115, 1, 1)
+material = SubResource("CanvasItemMaterial_ykaes")
+position = Vector2(-0.00012207, -0.00012207)
+texture = ExtResource("16_3d3o7")
+
+[node name="Shiny2" type="Sprite2D" parent="Node/Circle Inner"]
+self_modulate = Color(0.785529, 0.64393, 0.93991, 1)
+material = SubResource("CanvasItemMaterial_ykaes")
+position = Vector2(-0.00012207, -0.00012207)
+scale = Vector2(-0.9, -0.9)
+texture = ExtResource("16_3d3o7")
+
+[node name="Shiny3" type="Sprite2D" parent="Node/Circle Inner"]
+self_modulate = Color(0.604517, 0.800201, 1, 1)
+material = SubResource("CanvasItemMaterial_mswl6")
+texture = ExtResource("17_yym83")
+
+[node name="Shiny4" type="Sprite2D" parent="Node/Circle Inner"]
+self_modulate = Color(0.462745, 0.803922, 0.992157, 0.643137)
+material = SubResource("CanvasItemMaterial_qeo14")
+scale = Vector2(2.51, 2.51)
+texture = ExtResource("18_04s8s")
+
+[node name="Shiny5" type="Sprite2D" parent="Node/Circle Inner"]
+self_modulate = Color(0.614475, 0.453268, 0.999993, 1)
+material = SubResource("CanvasItemMaterial_6cvgh")
+scale = Vector2(0.385, 0.385)
+texture = ExtResource("16_3d3o7")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 23.0
+offset_top = 20.0
+offset_right = 325.0
+offset_bottom = 59.0
+theme_override_styles/background = ExtResource("13_yiudb")
+theme_override_styles/fill = ExtResource("14_i7vxx")
+max_value = 50.0
+show_percentage = false
+script = ExtResource("17_miavh")
+
+[node name="Sub Goal" type="Label" parent="ProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -11.5
+offset_right = 41.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_tq8ew")
+theme_override_font_sizes/font_size = 19
+text = "aaaaa"
+
+[node name="LevelUp" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_pbt4i")
+volume_db = -13.867
+
+[connection signal="body_entered" from="Black Hole/Detector" to="." method="_on_detector_body_entered"]

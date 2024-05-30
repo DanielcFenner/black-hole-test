@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://cfc6pa1y366nm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_tlyhg"]
+
+[sub_resource type="Environment" id="Environment_rui36"]
+background_mode = 3
+ambient_light_source = 1
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_threshold = 1.76
+adjustment_contrast = 5.12
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rqqjl"]
+radius = 61.7059
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0wam"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Gradient" id="Gradient_11833"]
+colors = PackedColorArray(0, 0.564706, 1, 1, 0.439216, 0.721569, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6mfgo"]
+gradient = SubResource("Gradient_11833")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pdsv1"]
+texture = SubResource("GradientTexture2D_6mfgo")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iyw4r"]
+height = 1236.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppsvs"]
+size = Vector2(2850, 55)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tlyhg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rui36")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1935.0
+offset_bottom = 1089.0
+color = Color(0, 0, 0.141176, 1)
+
+[node name="Black Hole" type="Area2D" parent="."]
+position = Vector2(54, 29)
+gravity_space_override = 2
+gravity_point = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Black Hole"]
+scale = Vector2(44.28, 44.28)
+shape = SubResource("CircleShape2D_rqqjl")
+
+[node name="ColorRect" type="ColorRect" parent="Black Hole"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Black Hole"]
+offset_left = -36.0
+offset_top = -13.0
+offset_right = 1838.0
+offset_bottom = 14.0
+theme_override_styles/background = SubResource("StyleBoxFlat_w0wam")
+theme_override_styles/fill = SubResource("StyleBoxTexture_pdsv1")
+show_percentage = false
+
+[node name="Detector" type="Area2D" parent="Black Hole"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Black Hole/Detector"]
+position = Vector2(-41, -18)
+shape = SubResource("CapsuleShape2D_iyw4r")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1004, 1092)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(30, 17.5)
+shape = SubResource("RectangleShape2D_ppsvs")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 700.0
+offset_top = 166.0
+offset_right = 1197.0
+offset_bottom = 235.0
+theme_override_font_sizes/font_size = 50
+text = "dude has subscribed"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="Black Hole/Detector" to="." method="_on_detector_body_entered"]

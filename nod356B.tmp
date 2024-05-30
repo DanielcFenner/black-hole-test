@@ -1,0 +1,144 @@
+[gd_scene load_steps=24 format=3 uid="uid://cfc6pa1y366nm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_tlyhg"]
+[ext_resource type="Texture2D" uid="uid://d218a225bc727" path="res://assets/circle.svg" id="2_bifhs"]
+[ext_resource type="AudioStream" uid="uid://jc1c6ubbn6mr" path="res://assets/Am1.mp3" id="2_dy360"]
+[ext_resource type="AudioStream" uid="uid://bukyc0w3h250o" path="res://assets/Am2.mp3" id="3_gbxfq"]
+[ext_resource type="AudioStream" uid="uid://cv1d51tqpr4eu" path="res://assets/G2.mp3" id="4_d6kco"]
+[ext_resource type="AudioStream" uid="uid://dtn6wwkus2adc" path="res://assets/G3.mp3" id="5_m17rx"]
+[ext_resource type="AudioStream" uid="uid://dd4vsglnskbwn" path="res://assets/Am3.mp3" id="6_bxi70"]
+[ext_resource type="AudioStream" uid="uid://d1iefsmardylx" path="res://assets/F1.mp3" id="7_j5x8u"]
+[ext_resource type="AudioStream" uid="uid://duhytp2vwfwh5" path="res://assets/F2.mp3" id="8_cm71q"]
+[ext_resource type="AudioStream" uid="uid://bje1rvvoqcj7y" path="res://assets/F3.mp3" id="9_poh2a"]
+[ext_resource type="AudioStream" uid="uid://b0rf3tnpsf22t" path="res://assets/C1.mp3" id="10_dekdd"]
+[ext_resource type="AudioStream" uid="uid://glxqhyao2ebd" path="res://assets/C2.mp3" id="11_ugn5r"]
+[ext_resource type="AudioStream" uid="uid://xtqdry0ih1q6" path="res://assets/C3.mp3" id="12_47rqs"]
+[ext_resource type="AudioStream" uid="uid://drlwin581xbv8" path="res://assets/G1.mp3" id="13_12dah"]
+
+[sub_resource type="Environment" id="Environment_rui36"]
+background_mode = 3
+ambient_light_source = 1
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_threshold = 1.6
+adjustment_contrast = 5.12
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rqqjl"]
+radius = 61.7059
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0wam"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Gradient" id="Gradient_11833"]
+colors = PackedColorArray(0, 0.564706, 1, 1, 0.439216, 0.721569, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6mfgo"]
+gradient = SubResource("Gradient_11833")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pdsv1"]
+texture = SubResource("GradientTexture2D_6mfgo")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iyw4r"]
+height = 1236.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppsvs"]
+size = Vector2(2850, 55)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uwvvh"]
+playback_mode = 2
+streams_count = 12
+stream_0/stream = ExtResource("2_dy360")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_gbxfq")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_bxi70")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("7_j5x8u")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("8_cm71q")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("9_poh2a")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("10_dekdd")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("11_ugn5r")
+stream_7/weight = 1.0
+stream_8/stream = ExtResource("12_47rqs")
+stream_8/weight = 1.0
+stream_9/stream = ExtResource("13_12dah")
+stream_9/weight = 1.0
+stream_10/stream = ExtResource("4_d6kco")
+stream_10/weight = 1.0
+stream_11/stream = ExtResource("5_m17rx")
+stream_11/weight = 1.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tlyhg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rui36")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1935.0
+offset_bottom = 1089.0
+color = Color(0, 0, 0.141176, 1)
+
+[node name="Black Hole" type="Area2D" parent="."]
+position = Vector2(54, 29)
+gravity_space_override = 2
+gravity_point = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Black Hole"]
+scale = Vector2(44.28, 44.28)
+shape = SubResource("CircleShape2D_rqqjl")
+
+[node name="ColorRect" type="ColorRect" parent="Black Hole"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Black Hole"]
+offset_left = -36.0
+offset_top = -13.0
+offset_right = 1838.0
+offset_bottom = 14.0
+theme_override_styles/background = SubResource("StyleBoxFlat_w0wam")
+theme_override_styles/fill = SubResource("StyleBoxTexture_pdsv1")
+show_percentage = false
+
+[node name="Detector" type="Area2D" parent="Black Hole"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Black Hole/Detector"]
+position = Vector2(-41, -18)
+shape = SubResource("CapsuleShape2D_iyw4r")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1004, 1092)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(30, 17.5)
+shape = SubResource("RectangleShape2D_ppsvs")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 700.0
+offset_top = 166.0
+offset_right = 1197.0
+offset_bottom = 235.0
+theme_override_font_sizes/font_size = 50
+text = "dude has subscribed"
+
+[node name="Popper" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_uwvvh")
+pitch_scale = 2.0
+
+[node name="circle" type="Sprite2D" parent="."]
+position = Vector2(33, 28)
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("2_bifhs")
+
+[connection signal="body_entered" from="Black Hole/Detector" to="." method="_on_detector_body_entered"]

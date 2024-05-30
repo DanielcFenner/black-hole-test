@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://cp5uo3tf0pv8k"]
+
+[ext_resource type="Script" path="res://RigidBody2D.gd" id="1_5yfe5"]
+[ext_resource type="Texture2D" uid="uid://c8f4fheeyysrw" path="res://assets/circleagain.png" id="2_iyp58"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b11vk"]
+friction = 0.38
+bounce = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sna5x"]
+radius = 4.12311
+
+[sub_resource type="Gradient" id="Gradient_3jks4"]
+colors = PackedColorArray(0.916167, 0.944514, 0.999999, 1, 0, 0.635294, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_81fmy"]
+gradient = SubResource("Gradient_3jks4")
+
+[sub_resource type="Curve" id="Curve_usvde"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nulrn"]
+curve = SubResource("Curve_usvde")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n8jqi"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector3(0, 0, 0)
+radial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_nulrn")
+color_ramp = SubResource("GradientTexture1D_81fmy")
+hue_variation_max = 0.02
+turbulence_enabled = true
+turbulence_noise_speed_random = 4.0
+
+[sub_resource type="Curve" id="Curve_afswe"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_iiviw"]
+colors = PackedColorArray(0, 0.564706, 1, 1, 0.760784, 0.901961, 1, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_swagp"]
+blend_mode = 1
+
+[node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2(0, 1)
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_b11vk")
+script = ExtResource("1_5yfe5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sna5x")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_n8jqi")
+
+[node name="Line2D" type="Line2D" parent="."]
+width_curve = SubResource("Curve_afswe")
+gradient = SubResource("Gradient_iiviw")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="circle" type="Sprite2D" parent="."]
+self_modulate = Color(0.760784, 0.901961, 1, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_iyp58")
+
+[node name="light" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(0.760784, 0.901961, 1, 1)
+material = SubResource("CanvasItemMaterial_swagp")
+scale = Vector2(0.0296257, 0.0296257)
